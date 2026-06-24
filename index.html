@@ -7,16 +7,16 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f6f8fb;
+      --bg: #f7fff2;
       --surface: #ffffff;
-      --surface-2: #eef3f7;
-      --line: #d9e1ea;
+      --surface-2: #f0ffe8;
+      --line: #dfead8;
       --text: #1d2633;
       --muted: #667587;
-      --brand: #1f6feb;
-      --brand-2: #0f5bd4;
-      --good: #147d52;
-      --bad: #bf3d35;
+      --brand: #559732;
+      --brand-2: #438321;
+      --good: #559732;
+      --bad: #ee7f7b;
       --flat: #697386;
       --warn: #9a6700;
       --shadow: 0 10px 28px rgba(23, 36, 54, .08);
@@ -177,8 +177,8 @@
       background: var(--brand);
     }
 
-    .bar-fill.previous-day { background: #6b7c93; }
-    .bar-fill.previous-month { background: #27a376; }
+    .bar-fill.previous-day { background: #f3aeac; }
+    .bar-fill.previous-month { background: #ee7f7b; }
 
     .bar-value {
       color: #344154;
@@ -560,9 +560,9 @@
     };
 
     const CUSTOMER_OVERVIEW = {
-      todayTotal: 84210,
-      yesterdayTotal: 83770,
-      previousMonthTotal: 81240
+      todayTotal: 25000000,
+      yesterdayTotal: 24910000,
+      previousMonthTotal: 24680000
     };
 
     const DEFAULT_ROWS = [
@@ -1006,8 +1006,17 @@
 
     function renderInitialState() {
       summary.innerHTML = "";
-      resultCount.textContent = "분석 결과 0건";
-      tableBody.innerHTML = `<tr><td colspan="6" class="empty">캠페인 ID를 입력하면 결과가 표시됩니다.</td></tr>`;
+      resultCount.textContent = `교차상품 항목 ${formatNumber(CROSS_ITEMS.length)}개`;
+      tableBody.innerHTML = CROSS_ITEMS.map(([, label]) => `
+        <tr>
+          <td>${escapeHtml(label)}</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td><span class="status flat">대기</span></td>
+        </tr>
+      `).join("");
     }
 
     function showMessage(text, type = "") {
